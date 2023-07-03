@@ -11,7 +11,7 @@ function ReloadPrompt() {
   // replaced dynamically
   const buildDate = '__DATE__'
   // replaced dyanmicaly
-  const reloadSW = 'true' // '__RELOAD_SW__'
+  let reloadSW = 'true' // '__RELOAD_SW__'
 
   const {
     offlineReady: [offlineReady, setOfflineReady],
@@ -21,11 +21,12 @@ function ReloadPrompt() {
     onRegisteredSW(swUrl, r) {
       // eslint-disable-next-line no-console
       console.log(`Service Worker at: ${swUrl}`)
-      if (reloadSW === 'true') {
+      setOfflineReady(true)
+      if (reloadSW === 'false') {
         r &&
           setInterval(() => {
             // eslint-disable-next-line no-console
-            console.log('Checking for sw update')
+            console.log('Checking for sw update', r)
             r.update()
           }, 20000 /* 20s for testing purposes */)
       } else {
@@ -38,6 +39,8 @@ function ReloadPrompt() {
       console.log('SW registration error', error)
     },
   })
+
+  console.log('offlineReady', offlineReady, needRefresh)
 
   const close = () => {
     setOfflineReady(false)

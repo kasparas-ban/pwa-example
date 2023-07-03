@@ -44,8 +44,6 @@ const claims = process.env.CLAIMS === 'true'
 const reload = process.env.RELOAD_SW === 'true'
 const selfDestroying = process.env.SW_DESTROY === 'true'
 
-console.log('process.env', claims, reload, selfDestroying, process.env.SW)
-
 if (process.env.SW === 'true') {
   pwaOptions.srcDir = 'src'
   pwaOptions.filename = claims ? 'claims-sw.ts' : 'prompt-sw.ts'

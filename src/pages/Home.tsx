@@ -39,7 +39,7 @@ function Home() {
         <button type="submit">GO</button>
       </form>
       <br />
-      <a href="/about">About NEW</a>
+      <a href="/about">About</a>
       <br />
     </div>
   )

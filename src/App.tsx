@@ -10,7 +10,7 @@ function App() {
   return (
     <main className="App">
       <img src="/favicon.svg" alt="PWA Logo" width="60" height="60" />
-      <h1 className="Home-title">PWA React!</h1>
+      <h1 className="Home-title">PWA React UPDATED!</h1>
       <div className="Home-built">Built at: {date}</div>
       <Outlet />
       <ReloadPrompt />

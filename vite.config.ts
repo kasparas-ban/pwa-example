@@ -44,33 +44,30 @@ const claims = process.env.CLAIMS === 'true'
 const reload = process.env.RELOAD_SW === 'true'
 const selfDestroying = process.env.SW_DESTROY === 'true'
 
+console.log('process.env', claims, reload, selfDestroying, process.env.SW)
+
 if (process.env.SW === 'true') {
   pwaOptions.srcDir = 'src'
   pwaOptions.filename = claims ? 'claims-sw.ts' : 'prompt-sw.ts'
   pwaOptions.strategies = 'injectManifest'
-  ;(pwaOptions.manifest as Partial<ManifestOptions>).name = 'PWA Inject Manifest'
+  ;(pwaOptions.manifest as Partial<ManifestOptions>).name =
+    'PWA Inject Manifest'
   ;(pwaOptions.manifest as Partial<ManifestOptions>).short_name = 'PWA Inject'
 }
 
-if (claims)
-  pwaOptions.registerType = 'autoUpdate'
+if (claims) pwaOptions.registerType = 'autoUpdate'
 
 if (reload) {
   // @ts-expect-error just ignore
   replaceOptions.__RELOAD_SW__ = 'true'
 }
 
-if (selfDestroying)
-  pwaOptions.selfDestroying = selfDestroying
+if (selfDestroying) pwaOptions.selfDestroying = selfDestroying
 
 export default defineConfig({
   // base: process.env.BASE_URL || 'https://github.com/',
   build: {
     sourcemap: process.env.SOURCE_MAP === 'true',
   },
-  plugins: [
-    react(),
-    VitePWA(pwaOptions),
-    replace(replaceOptions),
-  ],
+  plugins: [react(), VitePWA(pwaOptions), replace(replaceOptions)],
 })
